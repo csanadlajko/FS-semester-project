@@ -1,0 +1,44 @@
+.calculatedSavings {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calculatedSavings input {
+    margin-top: 4px;
+}
+
+#transaction-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#transaction-form input, select {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+}
+
+.mainTitle {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 2 / 2 / 3; }
+.div2 { grid-area: 1 / 4 / 2 / 5; }
+
+.div1, .div2 {
+    margin-top: 50%;
+    margin-bottom: 25%;
+}

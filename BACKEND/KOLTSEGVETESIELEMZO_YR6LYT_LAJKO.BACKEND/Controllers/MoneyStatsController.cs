@@ -15,18 +15,18 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
             this.repo = repo;
         }
 
-        [HttpPost]
-        public void AddTransaction([FromBody] MoneyStats stats)
+        [HttpPost("addStat")]
+        public IActionResult AddTransaction([FromBody] MoneyStats stats)
         {
-            Console.WriteLine("belep a helys vegpontba");
             MoneyStats addedStat = new MoneyStats(stats.spentAmount, stats.incomeAmount, stats.spentType, stats.incomeType);
             this.repo.AddNewStat(addedStat);
+            return Ok(new { success = "New stat added successfully" });
         }
 
         [HttpGet("getSavings")]
-        public float CalculateSavings([FromBody] MoneyStats stat)
+        public IActionResult CalculateSavings()
         {
-            return this.repo.CalculateSavings(stat);
+            return Ok(new { totalSavings = this.repo.CalculateTotalSavings() });
         }
 
     }

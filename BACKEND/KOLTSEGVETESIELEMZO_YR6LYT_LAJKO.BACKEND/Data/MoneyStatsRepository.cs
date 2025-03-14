@@ -6,18 +6,14 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
     {
         private List<MoneyStats> moneyStats = new List<MoneyStats>();
 
-        public float CalculateSavings(MoneyStats stat)
+        public float CalculateTotalSavings()
         {
-            float totalIncomeAmount = 0;
-            float totalSpentAmount = 0;
+            float totalSavings = 0;
             foreach (var item in moneyStats)
             {
-                totalIncomeAmount += item.incomeAmount;
-                totalSpentAmount += item.spentAmount;
-                
+                totalSavings += item.incomeAmount - item.spentAmount;
             }
-
-            return totalIncomeAmount - totalSpentAmount;
+            return totalSavings;
         }
 
         public void AddNewStat(MoneyStats stat)
