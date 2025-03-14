@@ -11,10 +11,11 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND
             builder.Services.AddSingleton<IMoneyStatsRepository, MoneyStatsRepository>();
             var app = builder.Build();
 
+
             app.UseRouting();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller}/{action=Index}/{id}"
+                pattern: "{controller}/{action=Index}/{id?}"
             );
 
             //app.MapGet("/", () => "Hello World!");
@@ -23,7 +24,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .WithOrigins("https://localhost:5500")
+                .WithOrigins("http://127.0.0.1:5500")
             );
 
             app.Run();

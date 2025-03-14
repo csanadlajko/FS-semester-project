@@ -5,6 +5,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
     public interface IMoneyStatsRepository
     {
         float CalculateSavings(MoneyStats stats);
+        void AddNewStat(MoneyStats stats);
 
     }
 }

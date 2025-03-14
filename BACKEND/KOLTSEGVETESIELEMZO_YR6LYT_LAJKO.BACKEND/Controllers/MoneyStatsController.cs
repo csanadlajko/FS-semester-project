@@ -5,28 +5,29 @@ using Microsoft.AspNetCore.Mvc;
 namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
 {
     [ApiController]
-    [Route("controller")]
+    [Route("[controller]")]
     public class MoneyStatsController : Controller
     {
         IMoneyStatsRepository repo;
-        List<MoneyStats> moneyStats;
 
         public MoneyStatsController(IMoneyStatsRepository repo)
         {
             this.repo = repo;
         }
 
-        [HttpPost("add")]
-        public IActionResult AddTransaction([FromBody] MoneyStats stats)
+        [HttpPost]
+        public void AddTransaction([FromBody] MoneyStats stats)
         {
-            moneyStats.Add(stats);
-            return Ok(new { message = "Sikeres tranzakció hozzáadás"});
+            Console.WriteLine("belep a helys vegpontba");
+            MoneyStats addedStat = new MoneyStats(stats.spentAmount, stats.incomeAmount, stats.spentType, stats.incomeType);
+            this.repo.AddNewStat(addedStat);
         }
 
-        [HttpGet]
+        [HttpGet("getSavings")]
         public float CalculateSavings([FromBody] MoneyStats stat)
         {
             return this.repo.CalculateSavings(stat);
         }
+
     }
 }

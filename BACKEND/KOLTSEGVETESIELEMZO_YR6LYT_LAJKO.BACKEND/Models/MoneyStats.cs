@@ -20,7 +20,15 @@
     {
         public float spentAmount {  get; set; }
         public float incomeAmount { get; set; }
-        public SpentType spentType { get; set; }
-        public IncomeType incomeType { get; set; }
+        public string spentType { get; set; }
+        public string incomeType { get; set; }
+
+        public MoneyStats(float spentAmount, float incomeAmount, string spentType, string incomeType)
+        {
+            this.spentAmount = spentAmount;
+            this.incomeAmount = incomeAmount;
+            this.spentType = spentType;
+            this.incomeType = incomeType;
+        }
     }
 }
