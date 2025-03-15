@@ -67,3 +67,7 @@
 .description {
     font-style: italic;
 }
+
+.container.mt-4 {
+    text-align: center;
+}

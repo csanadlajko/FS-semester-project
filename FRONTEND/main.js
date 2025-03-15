@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(err => console.log(err))
             await getTotalSavings()
             clearSpending()
+            await createSpendingStatTable();
         })
         
     }
@@ -103,12 +104,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     async function createIncomeStatTable() {
-        const tableBody = document.getElementById("incomeStats");
-        tableBody.innerHTML = "";
+        const incomeTableBody = document.getElementById("incomeStats");
+        incomeTableBody.innerHTML = "";
         const totalIncome = await getTotalIncome();
         const incomeList = await getAllIncome();
-        console.log("this is the income list below")
-        console.log(incomeList);
 
         incomeList.forEach(item => {
             let row = document.createElement("tr");
@@ -129,15 +128,57 @@ document.addEventListener("DOMContentLoaded", function() {
             incomeBar.style.width = (item.incomeAmount / totalIncome) * 100 + "%";
             incomeBar.textContent = item.income > 0 ? item.income.toLocaleString() + " Ft" : "";
 
+            let percentage = document.createElement("td");
+            percentage.textContent = ((item.incomeAmount / totalIncome)).toFixed(4) * 100 + "%"
+
             incomeBarContainer.appendChild(incomeBar);
             incomeBarCell.appendChild(incomeBarContainer);
 
             row.appendChild(categoryCell);
             row.appendChild(incomeCell);
             row.appendChild(incomeBarCell);
+            row.appendChild(percentage)
 
-            tableBody.appendChild(row);
+            incomeTableBody.appendChild(row);
         });
     }
 
+    async function createSpendingStatTable() {
+        const spendingTableBody = document.getElementById("spendingStats");
+        spendingTableBody.innerHTML = "";
+        const totalSpending = await getTotalSpending();
+        const allSpending = await getAllSpending();
+
+        console.log
+
+        allSpending.forEach(item => {
+            let row = document.createElement("tr");
+
+            let categoryCell = document.createElement("td");
+            categoryCell.textContent = item.spendingType;
+
+            let spendingCell = document.createElement("td");
+            spendingCell.textContent = item.spendingAmount.toLocaleString();
+
+            let spendingBarCell = document.createElement("td");
+            let spendingBarContainer = document.createElement("div");
+            spendingBarContainer.classList.add("progress");
+
+            let spendingBar = document.createElement("div");
+            spendingBar.classList.add("progress-bar", "bg-danger");
+            spendingBar.style.width = (item.spendingAmount / totalSpending) * 100 + "%";
+
+            let percentageCell = document.createElement("td");
+            percentageCell.textContent = ((item.spendingAmount / totalSpending) * 100).toFixed(4) + "%";
+
+            spendingBarContainer.appendChild(spendingBar);
+            spendingBarCell.appendChild(spendingBarContainer);
+            row.appendChild(categoryCell);
+            row.appendChild(spendingCell);
+            row.appendChild(spendingBarCell);
+            row.appendChild(percentageCell);
+
+            spendingTableBody.appendChild(row);
+        });
+    }
 })
