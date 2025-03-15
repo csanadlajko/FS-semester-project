@@ -10,15 +10,8 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
         public float CalculateTotalSavings()
         {
             float totalSavings = 0;
-            Console.WriteLine("Entering calculating function");
-            foreach (var item in income)
-            {
-                totalSavings += item.incomeAmount;
-            }
-            foreach (var item in spending)
-            {
-                totalSavings -= item.spendingAmount;
-            }
+            totalSavings += income.Sum(x => x.incomeAmount);
+            totalSavings -= spending.Sum(x => x.spendingAmount);
             return totalSavings;
         }
 

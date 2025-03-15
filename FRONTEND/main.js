@@ -126,10 +126,10 @@ document.addEventListener("DOMContentLoaded", function() {
             let incomeBar = document.createElement("div");
             incomeBar.classList.add("progress-bar", "bg-success");
             incomeBar.style.width = (item.incomeAmount / totalIncome) * 100 + "%";
-            incomeBar.textContent = item.income > 0 ? item.income.toLocaleString() + " Ft" : "";
+            incomeBar.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(4);
 
             let percentage = document.createElement("td");
-            percentage.textContent = ((item.incomeAmount / totalIncome)).toFixed(4) * 100 + "%"
+            percentage.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(4) + "%"
 
             incomeBarContainer.appendChild(incomeBar);
             incomeBarCell.appendChild(incomeBarContainer);
@@ -148,8 +148,6 @@ document.addEventListener("DOMContentLoaded", function() {
         spendingTableBody.innerHTML = "";
         const totalSpending = await getTotalSpending();
         const allSpending = await getAllSpending();
-
-        console.log
 
         allSpending.forEach(item => {
             let row = document.createElement("tr");
@@ -181,4 +179,65 @@ document.addEventListener("DOMContentLoaded", function() {
             spendingTableBody.appendChild(row);
         });
     }
+    
+    async function createOverallStatTable() {
+        const overallStatsTableBody = document.getElementById("overallStats");
+        overallStatsTableBody.innerHTML = "";
+        const totalIncome = await getTotalIncome();
+        const totalSpending = await getTotalSpending();
+        const totalSavings = await getTotalSavings();
+        const balance = totalIncome + totalSpending;
+
+        let row = document.createElement("tr");
+
+        let totalIncomeCell = document.createElement("td");
+        totalIncomeCell.textContent = totalIncome.toLocaleString();
+
+        let totalSpendingCell = document.createElement("td");
+        totalSpendingCell.textContent = totalSpending.toLocaleString();
+
+        let incomeRatioCell = document.createElement("td");
+        let incomeRatioContainer = document.createElement("div");
+        incomeRatioContainer.classList.add("progress");
+
+        let incomeRatioBar = document.createElement("div");
+        incomeRatioBar.classList.add("progress-bar");
+        incomeRatioBar.style.width = (totalIncome / balance) * 100 + "%";
+        incomeRatioBar.textContent = ((totalIncome / balance) * 100).toFixed(4) + "%";
+
+        let spendingRatioCell = document.createElement("td");
+        let spendingRatioContainer = document.createElement("div");
+        spendingRatioContainer.classList.add("progress");
+
+        let spendingRatioBar = document.createElement("div");
+        spendingRatioBar.classList.add("progress-bar");
+        spendingRatioBar.style.width = (totalSpending / balance) * 100 + "%";
+        spendingRatioBar.textContent = ((totalSpending / balance) * 100).toFixed(4) + "%";
+
+        let savings = document.createElement("td");
+        savings.textContent = document.getElementById("totalSavings").value;
+
+        incomeRatioContainer.appendChild(incomeRatioBar);
+        incomeRatioCell.appendChild(incomeRatioContainer);
+        spendingRatioContainer.appendChild(spendingRatioBar);
+        spendingRatioCell.appendChild(spendingRatioContainer);
+        row.appendChild(totalIncomeCell);
+        row.appendChild(totalSpendingCell);
+        row.appendChild(incomeRatioCell);
+        row.appendChild(spendingRatioCell);
+        row.appendChild(savings);
+
+        overallStatsTableBody.appendChild(row);
+    }
+
+    function generateOverallStats() {
+        document.getElementById("generateStats").addEventListener("click", async function() {
+            await createOverallStatTable();
+        })
+    }
+
+    createIncomeStatTable();
+    createSpendingStatTable()
+    generateOverallStats();
+
 })
