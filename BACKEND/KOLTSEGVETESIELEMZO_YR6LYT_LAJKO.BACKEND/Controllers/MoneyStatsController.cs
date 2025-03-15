@@ -15,19 +15,26 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
             this.repo = repo;
         }
 
-        [HttpPost("addStat")]
-        public IActionResult AddTransaction([FromBody] MoneyStats stats)
-        {
-            MoneyStats addedStat = new MoneyStats(stats.spentAmount, stats.incomeAmount, stats.spentType, stats.incomeType);
-            this.repo.AddNewStat(addedStat);
-            return Ok(new { success = "New stat added successfully" });
-        }
-
         [HttpGet("getSavings")]
         public IActionResult CalculateSavings()
         {
+            Console.WriteLine("Entering calculating endpoint");
             return Ok(new { totalSavings = this.repo.CalculateTotalSavings() });
         }
 
+        [HttpPost("addIncome")]
+        public IActionResult AddNewIncome([FromBody] IncomeDetails income)
+        {
+            IncomeDetails newIncome = new IncomeDetails(income.incomeAmount, income.incomeType);
+            this.repo.AddNewIncome(newIncome);
+            return Ok(new { success = "New income added successfully" });
+        }
+
+        public IActionResult AddNewSpending([FromBody] SpendingDetails spending)
+        {
+            SpendingDetails newSpending = new SpendingDetails(spending.spendingAmount, spending.spendingType);
+            this.repo.AddNewSpending(newSpending);
+            return Ok(new { success = "New spending added successfully" });
+        }
     }
 }

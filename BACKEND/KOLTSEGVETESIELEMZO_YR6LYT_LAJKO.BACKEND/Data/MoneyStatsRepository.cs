@@ -4,21 +4,32 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
 {
     public class MoneyStatsRepository : IMoneyStatsRepository
     {
-        private List<MoneyStats> moneyStats = new List<MoneyStats>();
+        private List<IncomeDetails> income = new List<IncomeDetails>();
+        private List<SpendingDetails> spending = new List<SpendingDetails>();
 
         public float CalculateTotalSavings()
         {
             float totalSavings = 0;
-            foreach (var item in moneyStats)
+            Console.WriteLine("Entering calculating function");
+            foreach (var item in income)
             {
-                totalSavings += item.incomeAmount - item.spentAmount;
+                totalSavings += item.incomeAmount;
+            }
+            foreach (var item in spending)
+            {
+                totalSavings -= item.spendingAmount;
             }
             return totalSavings;
         }
 
-        public void AddNewStat(MoneyStats stat)
+        public void AddNewIncome(IncomeDetails incomeDetails)
         {
-            moneyStats.Add(stat);
+            this.income.Add(incomeDetails);
+        }
+
+        public void AddNewSpending(SpendingDetails spendingDetails)
+        {
+            this.spending.Add(spendingDetails);
         }
     }
 }
