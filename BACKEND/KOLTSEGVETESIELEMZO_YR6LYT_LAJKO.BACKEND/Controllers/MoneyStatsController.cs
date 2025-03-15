@@ -18,7 +18,6 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         [HttpGet("getSavings")]
         public IActionResult CalculateSavings()
         {
-            Console.WriteLine("Entering calculating endpoint");
             return Ok(new { totalSavings = this.repo.CalculateTotalSavings() });
         }
 
@@ -30,11 +29,36 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
             return Ok(new { success = "New income added successfully" });
         }
 
+        [HttpPost("addSpending")]
         public IActionResult AddNewSpending([FromBody] SpendingDetails spending)
         {
             SpendingDetails newSpending = new SpendingDetails(spending.spendingAmount, spending.spendingType);
             this.repo.AddNewSpending(newSpending);
             return Ok(new { success = "New spending added successfully" });
+        }
+
+        [HttpGet("getTotalIncome")]
+        public IActionResult GetTotalIncome()
+        {
+            return Ok(new { totalIncome = this.repo.GetTotalIncome() } );
+        }
+
+        [HttpGet("getTotalSpending")]
+        public IActionResult GetTotalSpending()
+        {
+            return Ok(new { totalSpending = this.repo.GetTotalSpending() } );
+        }
+
+        [HttpGet("getAllIncome")]
+        public IEnumerable<IncomeDetails> GetIncomes()
+        {
+            return this.repo.GetAllIncome();
+        }
+
+        [HttpGet("getAllSpending")]
+        public IEnumerable<SpendingDetails> GetSpending()
+        {
+            return this.repo.GetAllSpending();
         }
     }
 }

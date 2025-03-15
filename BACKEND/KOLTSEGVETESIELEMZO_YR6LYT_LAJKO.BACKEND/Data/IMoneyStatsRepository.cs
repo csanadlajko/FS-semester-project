@@ -7,5 +7,9 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
         float CalculateTotalSavings();
         void AddNewIncome(IncomeDetails incomeDetails);
         void AddNewSpending(SpendingDetails spendingDetails);
+        float GetTotalIncome();
+        float GetTotalSpending();
+        List<IncomeDetails> GetAllIncome();
+        List<SpendingDetails> GetAllSpending();
     }
 }

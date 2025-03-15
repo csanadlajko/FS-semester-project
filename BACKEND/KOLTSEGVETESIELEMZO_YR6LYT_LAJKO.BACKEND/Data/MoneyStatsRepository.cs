@@ -31,5 +31,25 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
         {
             this.spending.Add(spendingDetails);
         }
+
+        public float GetTotalIncome()
+        {
+            return this.income.Sum(x => x.incomeAmount);
+        }
+
+        public float GetTotalSpending()
+        {
+            return this.spending.Sum(x => x.spendingAmount);
+        }
+
+        public List<IncomeDetails> GetAllIncome()
+        {
+            return this.income;
+        }
+
+        public List<SpendingDetails> GetAllSpending()
+        {
+            return this.spending;
+        }
     }
 }
