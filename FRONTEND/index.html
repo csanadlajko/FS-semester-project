@@ -12,19 +12,13 @@
     <h1 class="mainTitle">Költségvetési elemző</h1>
     <hr>
     <div class="parent">
-        <div class="div1">
-            <form id="transaction-form" name="Havi bevétel adatok">
-                <label for="incomeAmount" class="col-form-label">This month's income:</label>
-                <input type="number" min="0" id="incomeAmount" placeholder="This month's income" class="form-control w-auto">
-                <label for="spentAmount" class="col-form-label">Money spent this month:</label>
-                <input type="number" min="0" id="spentAmount" placeholder="Money spent this month" class="form-control w-auto">
-                <label for="incomeType" class="col-form-label">Select the type of income:</label>
-                <select id="incomeType" class="form-select w-auto">
-                    <option value="Alapvető">Alapvető</option>
-                    <option value="Szórakozás">Szórakozás</option>
-                    <option value="Salary">Salary</option>
-                    <option value="Egyéb">Egyéb</option>
-                </select>
+        <div class="div1 d-flex flex-column justify-content-center align-items-center">
+            <label for="currencyType" class="col-form-label" id="currencyLabel">Currency type:</label>
+            <input type="text" class="form-control w-auto" id="currencyType" placeholder="Input currency type">
+            <h2 class="description">
+                Add spent amount
+            </h2>
+            <form class="d-flex flex-column justify-content-center align-items-center" name="Havi bevétel adatok">
                 <label for="spentType" class="col-form-label">Select spending type:</label>
                 <select id="spentType" class="form-select w-auto">
                     <option value="Alapvető">Alapvető</option>
@@ -32,16 +26,37 @@
                     <option value="Emergency">Emeregency</option>
                     <option value="Egyéb">Egyéb</option>
                 </select>
-                <input type="button" id="submitTransaction" value="Elemezés" class="btn btn-success">
+                <label for="spentAmount" class="col-form-label" id="spentLabel">Money spent:</label>
+                <input type="number" min="0" id="spentAmount" placeholder="Money spent this month" class="form-control w-auto">
+                <input type="button" id="submitSpending" value="Add spent amount" class="btn btn-success submitButton">
             </form>
         </div>
         <div class="div2">
+            <h2 class="description">
+                Calculated total savings
+            </h2>
             <div class="calculatedSavings">
-                <label for="currentSavings" class="col-form-label">Current savings:</label>
-                <input type="text" disabled class="form-control w-auto" id="currentSavings" placeholder="Savings this month">
                 <label for="totalSavings" class="col-form-label">Total savings:</label>
-                <input type="text" disabled class="form-control w-auto" id="totalSavings" placeholder="Saving in total">
+                <input type="text" disabled class="form-control w-auto" id="totalSavings" placeholder="Savings in total">
+                <input type="button" class="btn btn-danger submitButton" id="generateStats" value="Generate statistics">
             </div>
+        </div>
+        <div class="div3">
+            <h2 class="description">
+                Add income
+            </h2>
+            <form class="d-flex flex-column justify-content-center align-items-center">
+                <label for="spentType" class="col-form-label">Select income type:</label>
+                <select id="incomeType" class="form-select w-auto">
+                    <option value="Alapvető">Alapvető</option>
+                    <option value="Szórakozás">Szórakozás</option>
+                    <option value="Salary">Salary</option>
+                    <option value="Egyéb">Egyéb</option>
+                </select>
+                <label for="incomeAmount" class="col-form-label" id="incomeLabel">Income:</label>
+                <input type="number" min="0" id="incomeAmount" placeholder="This month's income" class="form-control w-auto">
+                <input type="button" id="submitIncome" class="btn btn-success submitButton" value="Add income amount">
+            </form>
         </div>
     </div>
 </body>
