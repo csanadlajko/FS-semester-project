@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("incomeStatTable").style.display = "none";
+    document.getElementById("overallStatTable").style.display = "none";
+    document.getElementById("spendingStatTable").style.display = "none";
     function addNewIncome() {
         document.getElementById("submitIncome").addEventListener("click", async function() {
             let incomeAmount = document.getElementById("incomeAmount").value;
@@ -87,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function() {
     async function getAllIncome() {
         const response = await fetch("http://localhost:5284/MoneyStats/getAllIncome");
         const incomeResponse = await response.json();
-        console.log(incomeResponse)
         return incomeResponse;
     }
 
@@ -144,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+
     async function createSpendingStatTable() {
         const spendingTableBody = document.getElementById("spendingStats");
         spendingTableBody.innerHTML = "";
@@ -188,7 +191,6 @@ document.addEventListener("DOMContentLoaded", function() {
         overallStatsTableBody.innerHTML = "";
         const totalIncome = await getTotalIncome();
         const totalSpending = await getTotalSpending();
-        const balance = totalIncome + totalSpending;
         const currencyType = document.getElementById("currencyType").value;
 
         const popularIncome = await getPopularIncome();
@@ -231,16 +233,23 @@ document.addEventListener("DOMContentLoaded", function() {
         overallStatsTableBody.appendChild(row);
     }
 
-    function generateOverallStats() {
-        document.getElementById("generateStats").addEventListener("click", async function() {
-            await createOverallStatTable();
-        })
+    function showStats(switchId, tableDivId) {
+        document.getElementById(switchId).addEventListener("click", async function() {
+            const isChecked  = document.getElementById(switchId).checked;
+            hideTables(tableDivId, isChecked);
+        });
     }
 
     createIncomeStatTable();
-    createSpendingStatTable()
-    generateOverallStats();
+    createSpendingStatTable();
+    createOverallStatTable();
+    showStats("showStats", "overallStatTable");
+    showStats("showIncomeStats", "incomeStatTable");
+    showStats("showSpendingStats", "spendingStatTable");
 
+    function hideTables(tableDivId, isChecked) {
+        document.getElementById(tableDivId).style.display = isChecked ? "block" : "none";
+    }
 
     async function getPopularIncome() {
         const resp = await fetch("http://localhost:5284/MoneyStats/popularIncome");

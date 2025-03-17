@@ -56,6 +56,16 @@
     font-weight: bold;
 }
 
+#showStats {
+    margin: 5px !important;
+    text-align: start !important;
+    align-items: flex-end;
+}
+
+.switchClass {
+    margin: 10px !important;
+}
+
 #incomeType {
     text-align-last: center;
 }
