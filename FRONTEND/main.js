@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("totalSavings").value = "";
         }
         else {
-            document.getElementById("totalSavings").value = `${savingResponse.totalSavings} ${currencyType}`;
+            document.getElementById("totalSavings").value = savingResponse.totalSavings.toLocaleString() + ` ${currencyType}`;
         }
     }
 
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
         incomeTableBody.innerHTML = "";
         const totalIncome = await getTotalIncome();
         const incomeList = await getAllIncome();
+        const currencyType = document.getElementById("currencyType").value;
 
         incomeList.forEach(item => {
             let row = document.createElement("tr");
@@ -116,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
             categoryCell.textContent = item.incomeType;
 
             let incomeCell = document.createElement("td");
-            incomeCell.textContent = item.incomeAmount.toLocaleString();
+            incomeCell.textContent = item.incomeAmount.toLocaleString() + ` ${currencyType}`;
 
             let incomeBarCell = document.createElement("td");
 
@@ -126,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let incomeBar = document.createElement("div");
             incomeBar.classList.add("progress-bar", "bg-success");
             incomeBar.style.width = (item.incomeAmount / totalIncome) * 100 + "%";
-            incomeBar.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(4);
+            incomeBar.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(4) + "%";
 
             let percentage = document.createElement("td");
             percentage.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(4) + "%"
@@ -148,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
         spendingTableBody.innerHTML = "";
         const totalSpending = await getTotalSpending();
         const allSpending = await getAllSpending();
+        const currencyType = document.getElementById("currencyType").value;
 
         allSpending.forEach(item => {
             let row = document.createElement("tr");
@@ -156,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
             categoryCell.textContent = item.spendingType;
 
             let spendingCell = document.createElement("td");
-            spendingCell.textContent = item.spendingAmount.toLocaleString();
+            spendingCell.textContent = item.spendingAmount.toLocaleString() + ` ${currencyType}`;
 
             let spendingBarCell = document.createElement("td");
             let spendingBarContainer = document.createElement("div");
@@ -164,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             let spendingBar = document.createElement("div");
             spendingBar.classList.add("progress-bar", "bg-danger");
+            spendingBar.textContent = ((item.spendingAmount / totalSpending) * 100).toFixed(4) + "%"
             spendingBar.style.width = (item.spendingAmount / totalSpending) * 100 + "%";
 
             let percentageCell = document.createElement("td");
@@ -185,37 +188,35 @@ document.addEventListener("DOMContentLoaded", function() {
         overallStatsTableBody.innerHTML = "";
         const totalIncome = await getTotalIncome();
         const totalSpending = await getTotalSpending();
-        const totalSavings = await getTotalSavings();
         const balance = totalIncome + totalSpending;
+        const currencyType = document.getElementById("currencyType").value;
+
+        const popularIncome = await getPopularIncome();
+        const popularSpending = await getPopularSpending();
 
         let row = document.createElement("tr");
 
         let totalIncomeCell = document.createElement("td");
-        totalIncomeCell.textContent = totalIncome.toLocaleString();
+        totalIncomeCell.textContent = totalIncome.toLocaleString() + ` ${currencyType}`;
 
         let totalSpendingCell = document.createElement("td");
-        totalSpendingCell.textContent = totalSpending.toLocaleString();
+        totalSpendingCell.textContent = totalSpending.toLocaleString() + ` ${currencyType}`;
 
         let incomeRatioCell = document.createElement("td");
         let incomeRatioContainer = document.createElement("div");
-        incomeRatioContainer.classList.add("progress");
 
         let incomeRatioBar = document.createElement("div");
-        incomeRatioBar.classList.add("progress-bar");
-        incomeRatioBar.style.width = (totalIncome / balance) * 100 + "%";
-        incomeRatioBar.textContent = ((totalIncome / balance) * 100).toFixed(4) + "%";
+        incomeRatioCell.textContent = `${popularIncome.incomeType} ` + ((popularIncome.incomeAmount / totalIncome) * 100).toFixed(4) + "%";
 
         let spendingRatioCell = document.createElement("td");
         let spendingRatioContainer = document.createElement("div");
-        spendingRatioContainer.classList.add("progress");
 
         let spendingRatioBar = document.createElement("div");
         spendingRatioBar.classList.add("progress-bar");
-        spendingRatioBar.style.width = (totalSpending / balance) * 100 + "%";
-        spendingRatioBar.textContent = ((totalSpending / balance) * 100).toFixed(4) + "%";
+        spendingRatioCell.textContent = `${popularSpending.spendingType} ` + ((popularSpending.spendingAmount / totalSpending) * 100).toFixed(4) + "%";
 
         let savings = document.createElement("td");
-        savings.textContent = document.getElementById("totalSavings").value;
+        savings.textContent = document.getElementById("totalSavings").value + ` ${currencyType}`;
 
         incomeRatioContainer.appendChild(incomeRatioBar);
         incomeRatioCell.appendChild(incomeRatioContainer);
@@ -240,4 +241,16 @@ document.addEventListener("DOMContentLoaded", function() {
     createSpendingStatTable()
     generateOverallStats();
 
+
+    async function getPopularIncome() {
+        const resp = await fetch("http://localhost:5284/MoneyStats/popularIncome");
+        const respFormatted = await resp.json()
+        return respFormatted;
+    }
+
+    async function getPopularSpending() {
+        const resp = await fetch("http://localhost:5284/MoneyStats/popularSpending");
+        const respFormatted = await resp.json()
+        return respFormatted;
+    }
 })

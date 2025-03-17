@@ -18,8 +18,6 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND
                 pattern: "{controller}/{action=Index}/{id?}"
             );
 
-            //app.MapGet("/", () => "Hello World!");
-
             app.UseCors(x => x
                 .AllowCredentials()
                 .AllowAnyMethod()
