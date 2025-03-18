@@ -13,6 +13,11 @@
         public float incomeAmount {  get; set; }
         public string incomeType { get; set; }
 
+        public IncomeDetails()
+        {
+            
+        }
+
         public IncomeDetails(float incomeAmount, string incomeType)
         {
             this.incomeAmount = incomeAmount;

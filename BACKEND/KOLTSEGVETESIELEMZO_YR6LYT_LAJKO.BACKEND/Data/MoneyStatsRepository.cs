@@ -57,6 +57,11 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
                 .OrderByDescending(t => t.incomeAmont)
                 .FirstOrDefault();
 
+            if(popular == null)
+            {
+                return new IncomeDetails(0, "NaN");
+            }
+
             IncomeDetails mostPopular = new IncomeDetails(popular.incomeAmont, popular.incomeType);
             return mostPopular;
         }
@@ -73,8 +78,41 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
                 .OrderByDescending(t => t.spendingAmount)
                 .FirstOrDefault();
 
+            if (popular == null)
+            {
+                return new SpendingDetails(0, "NaN");
+            }
+
             SpendingDetails mostPopular = new SpendingDetails(popular.spendingAmount, popular.spendingType);
             return mostPopular;
+        }
+
+        public List<IncomeDetails> GetFilteredIncome()
+        {
+            var filteredTypes = this.income
+                .GroupBy(t => t.incomeType)
+                .Select(g => new IncomeDetails
+                {
+                    incomeType = g.Key,
+                    incomeAmount = g.Sum(o => o.incomeAmount)
+                })
+                .ToList();
+
+            return filteredTypes;
+        }
+
+        public List<SpendingDetails> GetFilteredSpending()
+        {
+            var filteredTypes = this.income
+                .GroupBy(t => t.incomeType)
+                .Select(g => new SpendingDetails
+                {
+                    spendingType = g.Key,
+                    spendingAmount = g.Sum(o => o.incomeAmount)
+                })
+                .ToList();
+
+            return filteredTypes;
         }
     }
 }

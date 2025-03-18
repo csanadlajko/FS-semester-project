@@ -13,5 +13,8 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
         List<SpendingDetails> GetAllSpending();
         IncomeDetails GetMostPopularIncome();
         SpendingDetails GetMostPopularSpending();
+
+        List<IncomeDetails> GetFilteredIncome();
+        List<SpendingDetails> GetFilteredSpending();
     }
 }

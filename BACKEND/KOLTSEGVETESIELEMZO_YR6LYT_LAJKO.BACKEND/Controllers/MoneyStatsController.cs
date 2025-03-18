@@ -72,5 +72,17 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         {
             return Ok(this.repo.GetMostPopularSpending());
         }
+
+        [HttpGet("getFilteredIncome")]
+        public IEnumerable<IncomeDetails> GetFilteredIncome()
+        {
+            return this.repo.GetFilteredIncome();
+        }
+
+        [HttpGet("getFilteredSpending")]
+        public IEnumerable<SpendingDetails> GetFilteredSpending()
+        {
+            return this.repo.GetFilteredSpending();
+        }
     }
 }

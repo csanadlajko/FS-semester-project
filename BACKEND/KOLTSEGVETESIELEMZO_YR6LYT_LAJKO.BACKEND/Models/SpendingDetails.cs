@@ -13,6 +13,11 @@
         public float spendingAmount { get; set; }
         public string spendingType { get; set; }
 
+        public SpendingDetails()
+        {
+            
+        }
+
         public SpendingDetails(float spendingAmount, string spendingType)
         {
             this.spendingAmount = spendingAmount;
