@@ -2,14 +2,12 @@ document.addEventListener("DOMContentLoaded", function() {
     async function getFilteredIncomeTypes() {
         const resp = await fetch("http://localhost:5284/MoneyStats/getFilteredIncome")
         const respJson = await resp.json()
-        console.log(respJson);
         return respJson
     }
 
     async function getFilteredSpending() {
         const resp = await fetch("http://localhost:5284/MoneyStats/getFilteredSpending")
         const respJson = await resp.json()
-        console.log(respJson);
         return respJson
     }
 
@@ -40,5 +38,32 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 
+    async function createFilteredSpendingTable() {
+        const filterSpendingBody = document.getElementById("spendingDetTable");
+        filterSpendingBody.innerHTML = "";
+
+        const spendingResp = await getFilteredSpending();
+        let totalSpending = 0;
+
+        spendingResp.forEach(item => {
+            totalSpending += item.spendingAmount;
+        })
+
+        spendingResp.forEach(item => {
+            const row = document.createElement("tr");
+
+            const spendingTypeCell = document.createElement("td");
+            spendingTypeCell.innerText = item.spendingType;
+
+            const spendingRateCell = document.createElement("td");
+            spendingRateCell.innerText = (item.spendingAmount / totalSpending * 100).toLocaleString() + "%";
+
+            row.appendChild(spendingTypeCell);
+            row.appendChild(spendingRateCell);
+
+            filterSpendingBody.appendChild(row);
+        })
+    }
     createFilteredIncomeTable();
+    createFilteredSpendingTable();
 });
