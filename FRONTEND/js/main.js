@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const response = await fetch("http://localhost:5284/MoneyStats/getSavings");
         const savingResponse = await response.json();
         const currencyType = document.getElementById("currencyType").value;
+        if (Number(savingResponse.totalSavings) < 0) alert("Túlköltekezés!")
         if (savingResponse.totalSavings === Number(0)) {
             document.getElementById("totalSavings").value = "";
         }
@@ -262,4 +263,5 @@ document.addEventListener("DOMContentLoaded", function() {
         const respFormatted = await resp.json()
         return respFormatted;
     }
+
 })
