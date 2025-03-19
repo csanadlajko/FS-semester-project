@@ -103,12 +103,12 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
 
         public List<SpendingDetails> GetFilteredSpending()
         {
-            var filteredTypes = this.income
-                .GroupBy(t => t.incomeType)
+            var filteredTypes = this.spending
+                .GroupBy(t => t.spendingType)
                 .Select(g => new SpendingDetails
                 {
                     spendingType = g.Key,
-                    spendingAmount = g.Sum(o => o.incomeAmount)
+                    spendingAmount = g.Sum(o => o.spendingAmount)
                 })
                 .ToList();
 

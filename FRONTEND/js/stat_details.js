@@ -18,9 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const incomeResponse = await getFilteredIncomeTypes();
 
         let totalIncome = 0;
-        incomeResponse.forEach(item => {
-            totalIncome += item.incomeAmount;
-        });
+        incomeResponse.forEach(item => totalIncome += item.incomeAmount);
 
         incomeResponse.forEach(item => {
             const row = document.createElement("tr");
@@ -29,8 +27,16 @@ document.addEventListener("DOMContentLoaded", function() {
             typeNameCell.innerText = item.incomeType;
 
             const incomeAmountCell = document.createElement("td");
-            incomeAmountCell.innerText = (item.incomeAmount / totalIncome * 100).toLocaleString() + "%";
+            const incomeFilterContainer = document.createElement("div");
+            incomeFilterContainer.classList.add("progress");
 
+            const incomeFilterBar = document.createElement("div");
+            incomeFilterBar.classList.add("progress-bar", "bg-success");
+            incomeFilterBar.innerText = (item.incomeAmount / totalIncome * 100).toLocaleString() + "%";
+            incomeFilterBar.style.width = (item.incomeAmount / totalIncome * 100) + "%";
+
+            incomeFilterContainer.appendChild(incomeFilterBar);
+            incomeAmountCell.appendChild(incomeFilterContainer);
             row.appendChild(typeNameCell);
             row.appendChild(incomeAmountCell);
 
@@ -45,9 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const spendingResp = await getFilteredSpending();
         let totalSpending = 0;
 
-        spendingResp.forEach(item => {
-            totalSpending += item.spendingAmount;
-        })
+        spendingResp.forEach(item => totalSpending += item.spendingAmount);
 
         spendingResp.forEach(item => {
             const row = document.createElement("tr");
@@ -56,8 +60,16 @@ document.addEventListener("DOMContentLoaded", function() {
             spendingTypeCell.innerText = item.spendingType;
 
             const spendingRateCell = document.createElement("td");
-            spendingRateCell.innerText = (item.spendingAmount / totalSpending * 100).toLocaleString() + "%";
+            const spendingFilterContainer = document.createElement("div");
+            spendingFilterContainer.classList.add("progress");
 
+            const spendingFilterBar = document.createElement("div");
+            spendingFilterBar.classList.add("progress-bar", "bg-danger");
+            spendingFilterBar.innerText = (item.spendingAmount / totalSpending * 100).toLocaleString() + "%";
+            spendingFilterBar.style.width = (item.spendingAmount / totalSpending * 100) + "%";
+
+            spendingFilterContainer.appendChild(spendingFilterBar);
+            spendingRateCell.appendChild(spendingFilterContainer);
             row.appendChild(spendingTypeCell);
             row.appendChild(spendingRateCell);
 

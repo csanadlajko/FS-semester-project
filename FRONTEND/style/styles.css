@@ -19,7 +19,7 @@
     font-size: 50px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
-    text-align: center;
+    text-align: center !important;
 }
 
 .parent {
@@ -83,6 +83,11 @@
 }
 
 hr {
-    margin-top: 50px !important;
+    margin-top: 10px !important;
     margin-bottom: 50px !important;
+}
+
+.table-subject {
+    font-weight: bold;
+    font-style: italic;
 }
