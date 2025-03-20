@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("incomeStatTable").style.display = "none";
-    document.getElementById("overallStatTable").style.display = "none";
-    document.getElementById("spendingStatTable").style.display = "none";
+    hideTablesWhenLoaded();
     function addNewIncome() {
         document.getElementById("submitIncome").addEventListener("click", async function() {
             let incomeAmount = document.getElementById("incomeAmount").value;
@@ -20,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(err => console.log(err))
             await getTotalSavings()
             clearIncome();
-            await createIncomeStatTable()
+            await createIncomeStatTable();
+            await createOverallStatTable();
         });
     }
 
@@ -44,16 +43,17 @@ document.addEventListener("DOMContentLoaded", function() {
             await getTotalSavings()
             clearSpending()
             await createSpendingStatTable();
+            await createOverallStatTable();
         })
         
     }
 
     function updateLabelNames() {
         document.getElementById("incomeAmount").addEventListener("click", function() {
-            document.getElementById("incomeLabel").innerText = `Income from ${document.getElementById("incomeType").value}:`
+            document.getElementById("incomeLabel").innerText = `Bevétel ${document.getElementById("incomeType").value}-ból/ből:`
         });
         document.getElementById("spentAmount").addEventListener("click", function() {
-            document.getElementById("spentLabel").innerText = `Money spent on ${document.getElementById("spentType").value}:`
+            document.getElementById("spentLabel").innerText = `Kiadás ${document.getElementById("spentType").value}-ra/re:`
         });
     }
     updateLabelNames()
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const response = await fetch("http://localhost:5284/MoneyStats/getSavings");
         const savingResponse = await response.json();
         const currencyType = document.getElementById("currencyType").value;
-        if (Number(savingResponse.totalSavings) < 0) alert("Túlköltekezés!")
+        if (Number(savingResponse.totalSavings) < 0) alert(`Túlköltekezés! Mértéke: ${savingResponse.totalSavings} ${currencyType}`)
         if (savingResponse.totalSavings === Number(0)) {
             document.getElementById("totalSavings").value = "";
         }
@@ -264,4 +264,12 @@ document.addEventListener("DOMContentLoaded", function() {
         return respFormatted;
     }
 
+    function hideTablesWhenLoaded() {
+        document.getElementById("incomeStatTable").style.display = "none";
+        document.getElementById("overallStatTable").style.display = "none";
+        document.getElementById("spendingStatTable").style.display = "none";
+        document.getElementById("showStats").checked = false;
+        document.getElementById("showSpendingStats").checked = false;
+        document.getElementById("showIncomeStats").checked = false;
+    }
 })
