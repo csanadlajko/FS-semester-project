@@ -37,18 +37,6 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
             return Ok(new { success = "New spending added successfully" });
         }
 
-        [HttpGet("getTotalIncome")]
-        public IActionResult GetTotalIncome()
-        {
-            return Ok(new { totalIncome = this.repo.GetTotalIncome() } );
-        }
-
-        [HttpGet("getTotalSpending")]
-        public IActionResult GetTotalSpending()
-        {
-            return Ok(new { totalSpending = this.repo.GetTotalSpending() } );
-        }
-
         [HttpGet("getAllIncome")]
         public IEnumerable<IncomeDetails> GetIncomes()
         {
@@ -59,18 +47,6 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         public IEnumerable<SpendingDetails> GetSpending()
         {
             return this.repo.GetAllSpending();
-        }
-
-        [HttpGet("popularIncome")]
-        public ActionResult<IncomeDetails> MostPopularIncome()
-        {
-            return Ok(this.repo.GetMostPopularIncome());
-        }
-
-        [HttpGet("popularSpending")]
-        public ActionResult<SpendingDetails> MostPopularSpending()
-        {
-            return Ok(this.repo.GetMostPopularSpending());
         }
 
         [HttpGet("getFilteredIncome")]

@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(transaction)
             })
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
             await getTotalSavings()
             clearIncome();
             await createIncomeStatTable();
@@ -38,8 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(transaction)
             })
-            .then(resp => console.log(resp.json()))
-            .then(err => console.log(err))
+            .catch(err => console.error(err))
             await getTotalSavings()
             clearSpending()
             await createSpendingStatTable();
@@ -83,9 +81,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     async function getTotalIncome() {
-        const response = await fetch("http://localhost:5284/MoneyStats/getTotalIncome");
+        const response = await fetch("http://localhost:5284/MoneyStats/getAllIncome");
         const incomeResponse = await response.json();
-        return Number(incomeResponse.totalIncome);
+        let totalIncome = 0;
+        incomeResponse.forEach(item => totalIncome += Number(item.incomeAmount));
+        return totalIncome;
     }
 
     async function getAllIncome() {
@@ -95,9 +95,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     async function getTotalSpending() {
-        const response = await fetch("http://localhost:5284/MoneyStats/getTotalSpending");
+        const response = await fetch("http://localhost:5284/MoneyStats/getAllSpending");
         const spendingResponse = await response.json();
-        return Number(spendingResponse.totalSpending);
+        let totalSpending = 0;
+        spendingResponse.forEach(item => totalSpending += Number(item.spendingAmount));
+        return totalSpending;
     }
 
     async function getAllSpending() {
@@ -253,15 +255,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     async function getPopularIncome() {
-        const resp = await fetch("http://localhost:5284/MoneyStats/popularIncome");
-        const respFormatted = await resp.json()
-        return respFormatted;
+        const resp = await fetch("http://localhost:5284/MoneyStats/getFilteredIncome");
+        const allIncome = await resp.json();
+        let maxIdx = 0;
+        for (let i = 1; i < allIncome.length; i++) {
+            if (allIncome[i].incomeAmount > allIncome[maxIdx].incomeAmount) {
+                maxIdx = i;
+            }
+        }
+        return allIncome[maxIdx];
     }
 
     async function getPopularSpending() {
-        const resp = await fetch("http://localhost:5284/MoneyStats/popularSpending");
-        const respFormatted = await resp.json()
-        return respFormatted;
+        const resp = await fetch("http://localhost:5284/MoneyStats/getFilteredSpending");
+        const allSpending = await resp.json();
+        let maxIdx = 0;
+        for (let i = 1; i < allSpending.length; i++) {
+            if (allSpending[i].spendingAmount > allSpending[maxIdx].spendingAmount) maxIdx = i;
+        }
+        return allSpending[maxIdx];
     }
 
     function hideTablesWhenLoaded() {
