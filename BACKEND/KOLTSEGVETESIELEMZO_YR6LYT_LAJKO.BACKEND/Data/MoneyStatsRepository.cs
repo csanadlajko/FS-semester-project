@@ -1,4 +1,5 @@
 ﻿using KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
 {
@@ -6,6 +7,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
     {
         private List<IncomeDetails> income = new List<IncomeDetails>();
         private List<SpendingDetails> spending = new List<SpendingDetails>();
+        private CurrencyDetails currency = new CurrencyDetails();
 
         public float CalculateTotalSavings()
         {
@@ -47,6 +49,8 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
                 })
                 .ToList();
 
+            if (filteredTypes == null) return new List<IncomeDetails>();
+
             return filteredTypes;
         }
 
@@ -61,7 +65,20 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
                 })
                 .ToList();
 
+            if (filteredTypes == null) return new List<SpendingDetails>();
+
             return filteredTypes;
+        }
+
+        public void AddCurrencyType(CurrencyDetails newCurrency)
+        {
+            this.currency.currencyType = newCurrency.currencyType;
+        }
+
+        public CurrencyDetails GetCurrencyType()
+        {
+            if (this.currency.currencyType != null) return this.currency;
+            return new CurrencyDetails(null);
         }
     }
 }

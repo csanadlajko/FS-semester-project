@@ -14,6 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(transaction)
             })
+            .then(resp => {
+                if(resp.status === 200) {
+                    let curr = document.getElementById("currencyType").value;
+                    alert(`Bevétel sikeresen hozzáadva!\nAdatok: ${incomeType} - ${incomeAmount} ${curr}`);
+                }
+                else alert("Sikertelen bevétel hozzáadás!");
+            })
             .catch(err => console.error(err))
             await getTotalSavings()
             clearIncome();
@@ -21,6 +28,36 @@ document.addEventListener("DOMContentLoaded", function() {
             await createOverallStatTable();
         });
     }
+
+    function addCurrencyType() {
+        document.getElementById("addCurrencyType").addEventListener("click", async function() {
+            let currencyType = document.getElementById("currencyType").value;
+
+            const newCurrencyType = {
+                currencyType: currencyType
+            }
+
+            await fetch("http://localhost:5284/MoneyStats/addCurrency", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body : JSON.stringify(newCurrencyType)
+            })
+            .then(resp => {
+                if (resp.status === 200) alert("Valuta sikeresen elmentve!");
+                else alert("A valuta mentése hibára futott");
+            })
+            .then(getCurrency)
+            .catch(err => console.error(err));
+        });
+    }
+
+    async function getCurrency() {
+        const resp = await fetch("http://localhost:5284/MoneyStats/getCurrency");
+        const currency = await resp.json()
+        document.getElementById("currencyType").value = currency.currencyType;
+        currency = currency.currencyType;
+    }
+
 
     function addNewSpending() {
         document.getElementById("submitSpending").addEventListener("click", async function () {
@@ -37,9 +74,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(transaction)
             })
+            .then(resp => {
+                if (resp.status === 200) {
+                    let curr = document.getElementById("currencyType").value;
+                    alert(`Költekezés sikeresen hozzáadva!\nAdatok: ${spendingType} - ${spendingAmount} ${curr}`);
+                }
+                else alert("Sikertelen költekezés hozzáadás");
+            })
             .catch(err => console.error(err))
-            await getTotalSavings()
-            clearSpending()
+            await getTotalSavings();
+            clearSpending();
             await createSpendingStatTable();
             await createOverallStatTable();
         })
@@ -54,10 +98,12 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("spentLabel").innerText = `Kiadás ${document.getElementById("spentType").value}-ra/re:`
         });
     }
-    updateLabelNames()
-    addNewIncome()
-    addNewSpending()
-    getTotalSavings()
+    updateLabelNames();
+    addNewIncome();
+    addNewSpending();
+    addCurrencyType();
+    getTotalSavings();
+    getCurrency();
 
     function clearIncome() {
         document.getElementById("incomeAmount").value = "";
@@ -263,6 +309,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 maxIdx = i;
             }
         }
+        if (!allIncome[maxIdx]) return 
         return allIncome[maxIdx];
     }
 

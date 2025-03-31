@@ -46,14 +46,19 @@
 
 #currencyType {
     position:absolute;
-    top: 20%;
+    top: 18%;
     text-align: center;
 }
 
 #currencyLabel {
     position: absolute;
-    top: 16% !important;
+    top: 14% !important;
     font-weight: bold;
+}
+
+#addCurrencyType {
+    position: absolute;
+    top: 22% !important;
 }
 
 #showStats {
@@ -90,4 +95,15 @@ hr {
 .table-subject {
     font-weight: bold;
     font-style: italic;
+}
+
+#incomeDetails {
+    margin-bottom: 60px;
+}
+
+#nav-text {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 30%;
 }

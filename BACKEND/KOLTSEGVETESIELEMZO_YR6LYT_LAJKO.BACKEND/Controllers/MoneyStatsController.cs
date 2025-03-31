@@ -24,7 +24,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         [HttpPost("addIncome")]
         public IActionResult AddNewIncome([FromBody] IncomeDetails income)
         {
-            IncomeDetails newIncome = new IncomeDetails(income.incomeAmount, income.incomeType);
+            IncomeDetails newIncome = new IncomeDetails(income.incomeType, income.incomeAmount);
             this.repo.AddNewIncome(newIncome);
             return Ok(new { success = "New income added successfully" });
         }
@@ -32,7 +32,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         [HttpPost("addSpending")]
         public IActionResult AddNewSpending([FromBody] SpendingDetails spending)
         {
-            SpendingDetails newSpending = new SpendingDetails(spending.spendingAmount, spending.spendingType);
+            SpendingDetails newSpending = new SpendingDetails(spending.spendingType, spending.spendingAmount);
             this.repo.AddNewSpending(newSpending);
             return Ok(new { success = "New spending added successfully" });
         }
@@ -60,5 +60,21 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         {
             return this.repo.GetFilteredSpending();
         }
+
+        [HttpPost("addCurrency")]
+        public IActionResult AddCurrencyType([FromBody] CurrencyDetails newCurrency)
+        {
+            CurrencyDetails addedCurrency = new CurrencyDetails(newCurrency.currencyType);
+            this.repo.AddCurrencyType(addedCurrency);
+            return Ok(new { success = "New currency type added successfully!" });
+        }
+
+        [HttpGet("getCurrency")]
+        public CurrencyDetails GetCurrency()
+        {
+            return this.repo.GetCurrencyType();
+        }
+
+
     }
 }

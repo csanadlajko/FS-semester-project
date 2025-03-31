@@ -13,5 +13,8 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
 
         List<IncomeDetails> GetFilteredIncome();
         List<SpendingDetails> GetFilteredSpending();
+
+        void AddCurrencyType(CurrencyDetails newCurrency);
+        CurrencyDetails GetCurrencyType();
     }
 }
