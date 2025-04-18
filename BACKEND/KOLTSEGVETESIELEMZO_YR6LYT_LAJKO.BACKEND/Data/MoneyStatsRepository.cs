@@ -49,8 +49,12 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
                 })
                 .ToList();
 
-            if (filteredTypes == null) return new List<IncomeDetails>();
-
+            if (!filteredTypes.Any())
+            {
+                List<IncomeDetails> dummyList = new List<IncomeDetails>();
+                dummyList.Add(new IncomeDetails("No income recorded yet!"));
+                return dummyList;
+            }
             return filteredTypes;
         }
 
@@ -65,7 +69,12 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
                 })
                 .ToList();
 
-            if (filteredTypes == null) return new List<SpendingDetails>();
+            if (!filteredTypes.Any())
+            {
+                List<SpendingDetails> dummyList = new List<SpendingDetails>();
+                dummyList.Add(new SpendingDetails("No spending recorded yet!"));
+                return dummyList;
+            }
 
             return filteredTypes;
         }

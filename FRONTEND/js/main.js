@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function getCurrency() {
         const resp = await fetch("http://localhost:5284/MoneyStats/getCurrency");
-        const currency = await resp.json()
+        let currency = await resp.json()
         document.getElementById("currencyType").value = currency.currencyType;
         currency = currency.currencyType;
     }
@@ -102,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function() {
     addNewIncome();
     addNewSpending();
     addCurrencyType();
-    getTotalSavings();
     getCurrency();
+    getTotalSavings();
 
     function clearIncome() {
         document.getElementById("incomeAmount").value = "";
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const response = await fetch("http://localhost:5284/MoneyStats/getSavings");
         const savingResponse = await response.json();
         const currencyType = document.getElementById("currencyType").value;
-        if (Number(savingResponse.totalSavings) < 0) alert(`Túlköltekezés! Mértéke: ${savingResponse.totalSavings} ${currencyType}`)
+        if (Number(savingResponse.totalSavings) < 0) alert(`Figyelem, túlköltekezés! Mértéke: ${savingResponse.totalSavings} ${currencyType}`)
         if (savingResponse.totalSavings === Number(0)) {
             document.getElementById("totalSavings").value = "";
         }
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function() {
         spendingRatioCell.textContent = `${popularSpending.spendingType} ` + ((popularSpending.spendingAmount / totalSpending) * 100).toFixed(4) + "%";
 
         let savings = document.createElement("td");
-        savings.textContent = document.getElementById("totalSavings").value + ` ${currencyType}`;
+        savings.textContent = document.getElementById("totalSavings").value;
 
         incomeRatioContainer.appendChild(incomeRatioBar);
         incomeRatioCell.appendChild(incomeRatioContainer);
