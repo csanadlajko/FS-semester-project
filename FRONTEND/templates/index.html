@@ -12,19 +12,18 @@
     <h1 class="mainTitle">Költségvetési elemző</h1>
     <hr>
     <div class="parent">
-        <div class="div1 d-flex flex-column justify-content-center align-items-center">
-            <label for="currencyType" class="col-form-label" id="currencyLabel">Valuta:</label>
-            <input type="text" class="form-control w-auto" id="currencyType" placeholder="Valuta típusa">
-            <input type="button" class="btn btn-success submitButton" id="addCurrencyType" value="Valuta hozzáadása">
+        <div class="div3 d-flex flex-column justify-content-center align-items-center">
             <h2 class="description">
                 Kiadás hozzáadása
             </h2>
             <form class="d-flex flex-column justify-content-center align-items-center" name="Havi bevétel adatok">
                 <label for="spentType" class="col-form-label">Kiadás típusa:</label>
                 <select id="spentType" class="form-select w-auto">
-                    <option value="Alapvető">Alapvető</option>
+                    <option value="Alapvető">Közlekedés</option>
                     <option value="Szórakozás">Szórakozás</option>
                     <option value="Vészhelyzet">Vészhelyzet</option>
+                    <option value="Lakhatás">Lakhatás</option>
+                    <option value="Oktatás / Fejlődés">Oktatás / Fejlődés</option>
                     <option value="Egyéb">Egyéb</option>
                 </select>
                 <label for="spentAmount" class="col-form-label" id="spentLabel">Kiadás:</label>
@@ -44,22 +43,24 @@
                 <label for="totalSavings" class="col-form-label">Megtakarítás:</label>
                 <input type="text" disabled class="form-control w-auto" id="totalSavings" placeholder="Megtakarítás összesen">
                 <div class="switchClass form-check form-switch d-flex flex-row justify-content-center align-items-center">
-                    <label class="form-check-label" for="showStats">Statisztika megjelenítése</label>
+                    <label class="form-check-label" for="showStats">Statisztika megjelenítése:</label>
                     <input class="form-check-input" type="checkbox" role="switch" id="showStats">
                 </div>
                 <input type="button" class="btn btn-danger submitButton" id="detailedStats" value="Részletes statisztika megjelenítése" onclick="window.location.href='stat_details.html'">
             </div>
         </div>
-        <div class="div3">
+        <div class="div1">
             <h2 class="description">
                 Bevétel hozzáadása
             </h2>
             <form class="d-flex flex-column justify-content-center align-items-center">
                 <label for="spentType" class="col-form-label">Bevétel típus kiválasztása:</label>
                 <select id="incomeType" class="form-select w-auto">
-                    <option value="Alapvető">Alapvető</option>
-                    <option value="Szórakozás">Szórakozás</option>
-                    <option value="Fizetés">Fizetés</option>
+                    <option value="Bónusz / Jutalom">Bónusz / Jutalom</option>
+                    <option value="Fizetés / Munkabér">Fizetés / Munkabér</option>
+                    <option value="Ajánkdék">Ajándék</option>
+                    <option value="Befektetés hozama">Befektetés hozama</option>
+                    <option value="Nyugdíj">Nyugdíj</option>
                     <option value="Egyéb">Egyéb</option>
                 </select>
                 <label for="incomeAmount" class="col-form-label" id="incomeLabel">Bevétel:</label>
@@ -70,6 +71,11 @@
                 <label class="form-check-label" for="showIncomeStats">Bevételek megjelenítése:</label>
                 <input class="form-check-input" type="checkbox" role="switch" id="showIncomeStats">
             </div>
+        </div>
+        <div class="div4 d-flex flex-column justify-content-center align-items-center">
+            <label for="currencyType" class="col-form-label" id="currencyLabel">Valuta:</label>
+            <input type="text" class="form-control w-auto" id="currencyType" placeholder="Valuta típusa">
+            <input type="button" class="btn btn-warning submitButton" id="addCurrencyType" value="Valuta hozzáadása">
         </div>
     </div>
     <div id="statContainer">
