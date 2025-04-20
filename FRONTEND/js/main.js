@@ -123,6 +123,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else {
             document.getElementById("totalSavings").value = savingResponse.totalSavings.toLocaleString() + ` ${currencyType}`;
+            if (savingResponse.totalSavings < 0) {
+                document.getElementById("totalSavings").style.color = "red";
+                document.getElementById("totalSavings").style.fontWeight = "bold";
+            } else {
+                document.getElementById("totalSavings").style.color = "black";
+                document.getElementById("totalSavings").style.fontWeight = "normal";
+            }
         }
     }
 
@@ -178,10 +185,10 @@ document.addEventListener("DOMContentLoaded", function() {
             let incomeBar = document.createElement("div");
             incomeBar.classList.add("progress-bar", "bg-success");
             incomeBar.style.width = (item.incomeAmount / totalIncome) * 100 + "%";
-            incomeBar.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(4) + "%";
+            incomeBar.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(1) + "%";
 
             let percentage = document.createElement("td");
-            percentage.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(4) + "%"
+            percentage.textContent = ((item.incomeAmount / totalIncome) * 100).toFixed(1) + "%"
 
             incomeBarContainer.appendChild(incomeBar);
             incomeBarCell.appendChild(incomeBarContainer);
@@ -218,11 +225,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             let spendingBar = document.createElement("div");
             spendingBar.classList.add("progress-bar", "bg-danger");
-            spendingBar.textContent = ((item.spendingAmount / totalSpending) * 100).toFixed(4) + "%"
+            spendingBar.textContent = ((item.spendingAmount / totalSpending) * 100).toFixed(1) + "%"
             spendingBar.style.width = (item.spendingAmount / totalSpending) * 100 + "%";
 
             let percentageCell = document.createElement("td");
-            percentageCell.textContent = ((item.spendingAmount / totalSpending) * 100).toFixed(4) + "%";
+            percentageCell.textContent = ((item.spendingAmount / totalSpending) * 100).toFixed(1) + "%";
 
             spendingBarContainer.appendChild(spendingBar);
             spendingBarCell.appendChild(spendingBarContainer);
@@ -257,14 +264,14 @@ document.addEventListener("DOMContentLoaded", function() {
         let incomeRatioContainer = document.createElement("div");
 
         let incomeRatioBar = document.createElement("div");
-        incomeRatioCell.textContent = `${popularIncome.incomeType} ` + ((popularIncome.incomeAmount / totalIncome) * 100).toFixed(4) + "%";
+        incomeRatioCell.textContent = `${popularIncome.incomeType} ` + ((popularIncome.incomeAmount / totalIncome) * 100).toFixed(1) + "%";
 
         let spendingRatioCell = document.createElement("td");
         let spendingRatioContainer = document.createElement("div");
 
         let spendingRatioBar = document.createElement("div");
         spendingRatioBar.classList.add("progress-bar");
-        spendingRatioCell.textContent = `${popularSpending.spendingType} ` + ((popularSpending.spendingAmount / totalSpending) * 100).toFixed(4) + "%";
+        spendingRatioCell.textContent = `${popularSpending.spendingType} ` + ((popularSpending.spendingAmount / totalSpending) * 100).toFixed(1) + "%";
 
         let savings = document.createElement("td");
         savings.textContent = document.getElementById("totalSavings").value;
