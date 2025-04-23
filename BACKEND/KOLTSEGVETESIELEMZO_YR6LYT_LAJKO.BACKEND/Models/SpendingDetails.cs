@@ -1,13 +1,5 @@
 ﻿namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models
 {
-    public enum SpendingType
-    {
-        Essentials,
-        Emergency,
-        Entertainment,
-        Other
-    }
-    
     public class SpendingDetails
     {
         public float spendingAmount { get; set; }

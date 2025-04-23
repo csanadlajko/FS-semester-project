@@ -1,13 +1,5 @@
 ﻿namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models
 {
-    public enum IncomeTypes 
-    {
-        Salary,
-        Birthday,
-        Gambling,
-        Other
-    }
-    
     public class IncomeDetails
     {
         public float incomeAmount {  get; set; }
