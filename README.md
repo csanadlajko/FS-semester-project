@@ -22,9 +22,17 @@ https://github.com/siposm/oktatas-fullstack/blob/master/semester-project/semeste
 		- **`border`** - gives border to the form
 		- **`rounded`** - makes the previously created border rounded
 		- **`shadow`** - adds subtle shadow effect to the box
+	- The description page uses cards to provide additional information about project:
+		- **`container`** - centers the child elements horizontally
+		- **`py-5`** - adds padding on the y-axis
+		- **`top-0 start-0`** - positioning the element at the top left corner
+		- **`g-4`** - sets gutter (spacing), padding between the cards
+		- **`col-md-4`** - resize cards when page is shrinked
+		- **`list-group-flush`** - removes borders around list cells
+		- **`my-5`** - adds margin on the y-axis
 	- Used switches to toggle between different (Bootstrap) tables (income / spending / overall statistics)
 	- Also used dark-themed Bootstrap tables to display filtered statistics on a separate page
 - ASP.NET framework for backend:
 	- **`Models`** - Initializing the model classes which are used across the project
 	- **`Data`** - Includes the main interface for core logic, along with its implementations
-	- **`Controllers`** - Provide API endpoints, consumed by the frontend
+	- **`Controllers`** - Provides API endpoints, consumed by the frontend

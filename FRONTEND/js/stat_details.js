@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const incomeFilterBar = document.createElement("div");
             incomeFilterBar.classList.add("progress-bar", "bg-success");
-            incomeFilterBar.innerText = (item.incomeAmount / totalIncome * 100).toLocaleString() + "%";
+            incomeFilterBar.innerText = (item.incomeAmount / totalIncome * 100).toFixed(1) + "%";
             incomeFilterBar.style.width = (item.incomeAmount / totalIncome * 100) + "%";
 
             incomeFilterContainer.appendChild(incomeFilterBar);
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const spendingFilterBar = document.createElement("div");
             spendingFilterBar.classList.add("progress-bar", "bg-danger");
-            spendingFilterBar.innerText = (item.spendingAmount / totalSpending * 100).toLocaleString() + "%";
+            spendingFilterBar.innerText = (item.spendingAmount / totalSpending * 100).toFixed(1) + "%";
             spendingFilterBar.style.width = (item.spendingAmount / totalSpending * 100) + "%";
 
             spendingFilterContainer.appendChild(spendingFilterBar);
