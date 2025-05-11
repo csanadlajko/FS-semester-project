@@ -26,7 +26,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         {
             IncomeDetails newIncome = new IncomeDetails(income.incomeType, income.incomeAmount);
             this.repo.AddNewIncome(newIncome);
-            return Ok(new { success = "New income added successfully" });
+            return Ok(new { success = "New income added successfully!" });
         }
 
         [HttpPost("addSpending")]
@@ -34,7 +34,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         {
             SpendingDetails newSpending = new SpendingDetails(spending.spendingType, spending.spendingAmount);
             this.repo.AddNewSpending(newSpending);
-            return Ok(new { success = "New spending added successfully" });
+            return Ok(new { success = "New spending added successfully!" });
         }
 
         [HttpGet("getAllIncome")]
