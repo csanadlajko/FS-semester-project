@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("totalSavings").value = "";
         }
         else {
-            document.getElementById("totalSavings").value = savingResponse.totalSavings.toLocaleString() + ` ${currencyType}`;
+            document.getElementById("totalSavings").value = savingResponse.totalSavings + ` ${currencyType}`;
             if (savingResponse.totalSavings < 0) {
                 document.getElementById("totalSavings").style.color = "red";
                 document.getElementById("totalSavings").style.fontWeight = "bold";
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
             categoryCell.textContent = item.incomeType;
 
             let incomeCell = document.createElement("td");
-            incomeCell.textContent = item.incomeAmount.toLocaleString() + ` ${currencyType}`;
+            incomeCell.textContent = item.incomeAmount + ` ${currencyType}`;
 
             let incomeBarCell = document.createElement("td");
 
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
             categoryCell.textContent = item.spendingType;
 
             let spendingCell = document.createElement("td");
-            spendingCell.textContent = item.spendingAmount.toLocaleString() + ` ${currencyType}`;
+            spendingCell.textContent = item.spendingAmount + ` ${currencyType}`;
 
             let spendingBarCell = document.createElement("td");
             let spendingBarContainer = document.createElement("div");
@@ -255,10 +255,10 @@ document.addEventListener("DOMContentLoaded", function() {
         let row = document.createElement("tr");
 
         let totalIncomeCell = document.createElement("td");
-        totalIncomeCell.textContent = totalIncome.toLocaleString() + ` ${currencyType}`;
+        totalIncomeCell.textContent = totalIncome + ` ${currencyType}`;
 
         let totalSpendingCell = document.createElement("td");
-        totalSpendingCell.textContent = totalSpending.toLocaleString() + ` ${currencyType}`;
+        totalSpendingCell.textContent = totalSpending + ` ${currencyType}`;
 
         let incomeRatioCell = document.createElement("td");
         let incomeRatioContainer = document.createElement("div");
