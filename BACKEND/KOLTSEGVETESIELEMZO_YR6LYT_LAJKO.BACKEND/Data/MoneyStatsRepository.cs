@@ -1,5 +1,8 @@
 ﻿using KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Net.Http;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
 {
@@ -89,5 +92,18 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
             if (this.currency.currencyType != null) return this.currency;
             return new CurrencyDetails(null);
         }
+
+        public string GetPredictionData()
+        {
+            var client = new HttpClient();
+            var response = client.GetAsync("http://127.0.0.1:5000/api/predict");
+
+            var result = response.Result;
+
+            Console.WriteLine($"Response from python received successfully, status code: {result.StatusCode}");
+
+            return result.ToString();
+        }
+
     }
 }

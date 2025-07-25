@@ -16,5 +16,6 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
 
         void AddCurrencyType(CurrencyDetails newCurrency);
         CurrencyDetails GetCurrencyType();
+        string GetPredictionData();
     }
 }

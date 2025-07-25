@@ -26,6 +26,7 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         {
             IncomeDetails newIncome = new IncomeDetails(income.incomeType, income.incomeAmount);
             this.repo.AddNewIncome(newIncome);
+            var testString = this.repo.GetPredictionData();
             return Ok(new { success = "New income added successfully!" });
         }
 
