@@ -1,4 +1,5 @@
 ﻿using KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models;
+using System.Net.Http.Json;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net.Http;
 using System.Text;
@@ -105,5 +106,13 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
             return result.ToString();
         }
 
+
+        public List<IncomeDetails> GetAverageIncome()
+        {
+            var client = new HttpClient();
+            var response = client.GetFromJsonAsync<List<IncomeDetails>>("http://127.0.0.1:5000/api/averageIncome");
+
+            return response.Result;
+        }
     }
 }

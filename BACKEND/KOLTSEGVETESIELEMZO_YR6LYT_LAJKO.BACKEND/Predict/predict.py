@@ -7,6 +7,9 @@ from sklearn.linear_model import LinearRegression
 class PredictIncome:
     ALL_INCOME_API: str = f"{CommonConstants.LOCAL_BASE_URL}{CommonConstants.ALL_INCOME_ENDPOINT}"
     
+    def __init__(self) -> None:
+        self.income_data = PredictIncome.parse_income()
+    
     def parse_income() -> pd.DataFrame:
         response: requests.Response = requests.get(url=PredictIncome.ALL_INCOME_API)
         response_data: Any = response.json()
@@ -19,6 +22,10 @@ class PredictIncome:
         income_data_dict.update({"incomeAmount": income_amount})
         income_data_dict.update({"incomeType": income_type})
         return pd.DataFrame(income_data_dict)
+    
+    def average_income_by_type(self) -> pd.DataFrame:
+        average_price: pd.DataFrame = self.income_data.groupby("incomeType", as_index=False)["incomeAmount"].mean()
+        return average_price
         
     def predict_income():
         all_income: pd.DataFrame = PredictIncome.parse_income()

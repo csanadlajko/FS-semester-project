@@ -76,6 +76,10 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
             return this.repo.GetCurrencyType();
         }
 
-
+        [HttpGet("getAverageFromPython")]
+        public IEnumerable<IncomeDetails> GetAverageIncome()
+        {
+            return this.repo.GetAverageIncome();
+        }
     }
 }
