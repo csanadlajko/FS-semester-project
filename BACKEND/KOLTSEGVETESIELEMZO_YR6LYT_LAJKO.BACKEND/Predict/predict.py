@@ -5,9 +5,10 @@ from typing import Any
 from sklearn.linear_model import LinearRegression
 
 class PredictIncome:
+    ALL_INCOME_API: str = f"{CommonConstants.LOCAL_BASE_URL}{CommonConstants.ALL_INCOME_ENDPOINT}"
     
     def parse_income() -> pd.DataFrame:
-        response: requests.Response = requests.get(url=f"{CommonConstants.LOCAL_BASE_URL}/{CommonConstants.ALL_INCOME_ENDPOINT}")
+        response: requests.Response = requests.get(url=PredictIncome.ALL_INCOME_API)
         response_data: Any = response.json()
         income_amount: list[int] = []
         income_type: list[str] = []
@@ -17,7 +18,7 @@ class PredictIncome:
             income_type.append(item["incomeType"])
         income_data_dict.update({"incomeAmount": income_amount})
         income_data_dict.update({"incomeType": income_type})
-        return income_data_dict
+        return pd.DataFrame(income_data_dict)
         
     def predict_income():
         all_income: pd.DataFrame = PredictIncome.parse_income()
