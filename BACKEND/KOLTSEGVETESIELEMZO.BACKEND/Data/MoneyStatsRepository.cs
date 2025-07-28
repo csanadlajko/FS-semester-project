@@ -1,11 +1,11 @@
-﻿using KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models;
+﻿using KOLTSEGVETESIELEMZO.BACKEND.Models;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
+namespace KOLTSEGVETESIELEMZO.BACKEND.Data
 {
     public class MoneyStatsRepository : IMoneyStatsRepository
     {

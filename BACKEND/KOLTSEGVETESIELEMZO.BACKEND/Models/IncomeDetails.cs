@@ -1,4 +1,4 @@
-﻿namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models
+﻿namespace KOLTSEGVETESIELEMZO.BACKEND.Models
 {
     public class IncomeDetails
     {

@@ -1,8 +1,8 @@
-﻿using KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data;
-using KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Models;
+﻿using KOLTSEGVETESIELEMZO.BACKEND.Data;
+using KOLTSEGVETESIELEMZO.BACKEND.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
+namespace KOLTSEGVETESIELEMZO.BACKEND.Controllers
 {
     [ApiController]
     [Route("[controller]")]
