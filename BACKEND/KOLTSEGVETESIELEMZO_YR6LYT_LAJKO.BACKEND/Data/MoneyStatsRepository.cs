@@ -94,23 +94,18 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Data
             return new CurrencyDetails(null);
         }
 
-        public string GetPredictionData()
-        {
-            var client = new HttpClient();
-            var response = client.GetAsync("http://127.0.0.1:5000/api/predict");
-
-            var result = response.Result;
-
-            Console.WriteLine($"Response from python received successfully, status code: {result.StatusCode}");
-
-            return result.ToString();
-        }
-
-
         public List<IncomeDetails> GetAverageIncome()
         {
             var client = new HttpClient();
             var response = client.GetFromJsonAsync<List<IncomeDetails>>("http://127.0.0.1:5000/api/averageIncome");
+
+            return response.Result;
+        }
+
+        public List<SpendingDetails> GetAverageSpending()
+        {
+            var client = new HttpClient();
+            var response = client.GetFromJsonAsync<List<SpendingDetails>>("http://127.0.0.1:5000/api/averageSpending");
 
             return response.Result;
         }

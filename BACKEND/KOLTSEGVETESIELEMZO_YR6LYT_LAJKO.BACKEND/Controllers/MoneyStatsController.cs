@@ -26,7 +26,6 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         {
             IncomeDetails newIncome = new IncomeDetails(income.incomeType, income.incomeAmount);
             this.repo.AddNewIncome(newIncome);
-            var testString = this.repo.GetPredictionData();
             return Ok(new { success = "New income added successfully!" });
         }
 
@@ -80,6 +79,12 @@ namespace KOLTSEGVETESIELEMZO_YR6LYT_LAJKO.BACKEND.Controllers
         public IEnumerable<IncomeDetails> GetAverageIncome()
         {
             return this.repo.GetAverageIncome();
+        }
+
+        [HttpGet("getAverageSpendingFromPython")]
+        public IEnumerable<SpendingDetails> GetAverageSpending()
+        {
+            return this.repo.GetAverageSpending();
         }
     }
 }
