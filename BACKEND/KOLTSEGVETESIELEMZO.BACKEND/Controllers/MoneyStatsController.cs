@@ -75,7 +75,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Controllers
             return this.repo.GetCurrencyType();
         }
 
-        [HttpGet("getAverageFromPython")]
+        [HttpGet("getAverageIncomeFromPython")]
         public IEnumerable<IncomeDetails> GetAverageIncome()
         {
             return this.repo.GetAverageIncome();
