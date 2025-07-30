@@ -18,5 +18,6 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         CurrencyDetails GetCurrencyType();
         List<IncomeDetails> GetAverageIncome();
         List<SpendingDetails> GetAverageSpending();
+        bool ValidateIncome(IncomeDetails income);
     }
 }

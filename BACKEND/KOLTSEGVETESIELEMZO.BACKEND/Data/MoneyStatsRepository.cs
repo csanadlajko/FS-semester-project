@@ -109,5 +109,23 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
 
             return response.Result;
         }
+
+        public bool ValidateIncome(IncomeDetails income)
+        {
+            var client = new HttpClient();
+            var payload = new { 
+                incomeType = income.incomeType,
+                incomeAmount = income.incomeAmount
+            };
+
+            var json = JsonConvert.SerializeObject(payload);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = client.PostAsync("http://127.0.0.1:5000/api/checkIncome", content);
+            var respString = response.Result.Content.ReadAsStringAsync().Result;
+
+            var result = JsonConvert.DeserializeObject<IncomeDetails>(respString);
+            return result.Status;
+        }
     }
 }

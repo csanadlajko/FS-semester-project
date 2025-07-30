@@ -26,7 +26,9 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Controllers
         {
             IncomeDetails newIncome = new IncomeDetails(income.incomeType, income.incomeAmount);
             this.repo.AddNewIncome(newIncome);
-            return Ok(new { success = "New income added successfully!" });
+            bool valid = this.repo.ValidateIncome(newIncome);
+            if (valid) return Ok(new { info = "New income added successfully!" });
+            return Ok(new { info = $"New income added successfully! \nWarning! Value: {income.incomeAmount} above or below the 10% threshold of the average income for {income.incomeType}" });
         }
 
         [HttpPost("addSpending")]
