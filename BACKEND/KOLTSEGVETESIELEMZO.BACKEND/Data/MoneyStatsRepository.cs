@@ -97,7 +97,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         public List<IncomeDetails> GetAverageIncome()
         {
             var client = new HttpClient();
-            var response = client.GetFromJsonAsync<List<IncomeDetails>>("http://127.0.0.1:5000/api/averageIncome");
+            var response = client.GetFromJsonAsync<List<IncomeDetails>>("http://flask-api:5001/api/averageIncome");
 
             return response.Result;
         }
@@ -105,7 +105,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         public List<SpendingDetails> GetAverageSpending()
         {
             var client = new HttpClient();
-            var response = client.GetFromJsonAsync<List<SpendingDetails>>("http://127.0.0.1:5000/api/averageSpending");
+            var response = client.GetFromJsonAsync<List<SpendingDetails>>("http://flask-api:5001/api/averageSpending");
 
             return response.Result;
         }
@@ -122,7 +122,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
             var json = JsonConvert.SerializeObject(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = client.PostAsync("http://127.0.0.1:5000/api/checkIncome", content);
+            var response = client.PostAsync("http://flask-api:5001/api/checkIncome", content);
             var respString = response.Result.Content.ReadAsStringAsync().Result;
 
             var result = JsonConvert.DeserializeObject<IncomeDetails>(respString);
@@ -141,7 +141,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
             var json = JsonConvert.SerializeObject(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = client.PostAsync("http://127.0.0.1:5000/api/checkSpending", content);
+            var response = client.PostAsync("http://flask-api:5001/api/checkSpending", content);
             var responseString = response.Result.Content.ReadAsStringAsync().Result;
 
             var result = JsonConvert.DeserializeObject<SpendingDetails>(responseString);

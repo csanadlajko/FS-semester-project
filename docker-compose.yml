@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  flask-api:
+    build:
+      context: BACKEND/KOLTSEGVETESIELEMZO.BACKEND/Predict
+    ports:
+      - "5002:5002"
+    networks:
+      - backend-net
+
+  dotnet-backend:
+    build:
+      context: BACKEND/KOLTSEGVETESIELEMZO.BACKEND
+    ports:
+      - "5284:5284"
+    depends_on:
+      - flask-api
+    networks:
+      - backend-net
+
+networks:
+  backend-net:
