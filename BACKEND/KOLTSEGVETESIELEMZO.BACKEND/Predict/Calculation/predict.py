@@ -33,3 +33,12 @@ class PredictSpending:
     def average_spending_by_type(self) -> pd.DataFrame:
         avg_price: pd.DataFrame = self.spending_data.groupby("spendingType", as_index=False)["spendingAmount"].mean()
         return avg_price
+    
+    def check_income(self, income_data: dict[str, float]) -> bool:
+        all_avg_spending: pd.DataFrame = self.average_spending_by_type()
+        avg_for_type: float = all_avg_spending.loc[all_avg_spending["spendingType"] == income_data["spendingType"], "spendingAmount"].item()
+        upper_treshold: float = avg_for_type + (avg_for_type * self.treshold)
+        lower_treshold: float = avg_for_type - (avg_for_type *self.treshold)
+        if (income_data["spendingAmount"] > lower_treshold and income_data["spendingAmount"] < upper_treshold):
+            return True
+        return False

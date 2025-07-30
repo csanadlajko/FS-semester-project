@@ -19,5 +19,6 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         List<IncomeDetails> GetAverageIncome();
         List<SpendingDetails> GetAverageSpending();
         bool ValidateIncome(IncomeDetails income);
+        bool ValidateSpending(SpendingDetails spending);
     }
 }

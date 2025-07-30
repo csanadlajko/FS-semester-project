@@ -71,12 +71,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(transaction)
             })
-            .then(resp => {
-                if (resp.status === 200) {
-                    let curr = document.getElementById("currencyType").value;
-                    alert(`Költekezés sikeresen hozzáadva!\nAdatok: ${spendingType} - ${spendingAmount} ${curr}`);
-                }
-                else alert("Sikertelen költekezés hozzáadás");
+            .then(resp => resp.json())
+            .then(data => {
+                alert(data.info)
             })
             .catch(err => console.error(err))
             await getTotalSavings();

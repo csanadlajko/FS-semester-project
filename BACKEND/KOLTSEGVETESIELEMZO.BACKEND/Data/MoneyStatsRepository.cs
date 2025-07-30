@@ -113,7 +113,8 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         public bool ValidateIncome(IncomeDetails income)
         {
             var client = new HttpClient();
-            var payload = new { 
+            var payload = new
+            {
                 incomeType = income.incomeType,
                 incomeAmount = income.incomeAmount
             };
@@ -125,6 +126,25 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
             var respString = response.Result.Content.ReadAsStringAsync().Result;
 
             var result = JsonConvert.DeserializeObject<IncomeDetails>(respString);
+            return result.Status;
+        }
+
+        public bool ValidateSpending(SpendingDetails spending)
+        {
+            var client = new HttpClient();
+            var payload = new
+            {
+                spendingType = spending.spendingType,
+                spendingAmount = spending.spendingAmount
+            };
+
+            var json = JsonConvert.SerializeObject(payload);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = client.PostAsync("http://127.0.0.1:5000/api/checkSpending", content);
+            var responseString = response.Result.Content.ReadAsStringAsync().Result;
+
+            var result = JsonConvert.DeserializeObject<SpendingDetails>(responseString);
             return result.Status;
         }
     }

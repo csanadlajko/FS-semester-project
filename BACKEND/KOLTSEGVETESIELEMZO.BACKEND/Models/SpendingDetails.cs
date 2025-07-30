@@ -1,9 +1,14 @@
-﻿namespace KOLTSEGVETESIELEMZO.BACKEND.Models
+﻿using Newtonsoft.Json;
+
+namespace KOLTSEGVETESIELEMZO.BACKEND.Models
 {
     public class SpendingDetails
     {
         public float spendingAmount { get; set; }
         public string? spendingType { get; set; }
+
+        [JsonProperty("status")]
+        public bool Status { get; set; }
 
         public SpendingDetails()
         {

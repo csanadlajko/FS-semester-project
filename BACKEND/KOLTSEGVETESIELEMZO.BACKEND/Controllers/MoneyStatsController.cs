@@ -36,7 +36,9 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Controllers
         {
             SpendingDetails newSpending = new SpendingDetails(spending.spendingType, spending.spendingAmount);
             this.repo.AddNewSpending(newSpending);
-            return Ok(new { success = "New spending added successfully!" });
+            bool validSpending = this.repo.ValidateSpending(newSpending);
+            if (validSpending) return Ok(new { info = "New spending added successfully!" });
+            return Ok(new { info = $"New income added successfully! \nWarning! Value: {spending.spendingAmount} above or below the 10% threshold of the average spending for {spending.spendingType}" });
         }
 
         [HttpGet("getAllIncome")]
