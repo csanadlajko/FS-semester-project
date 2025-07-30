@@ -1,4 +1,4 @@
-#income-average-container {
+.average-display-container {
     display: none;
     position: fixed;
     top: 0;
@@ -11,7 +11,7 @@
     z-index: 9999;
 }
 
-#income-average-container form {
+.average-display-container form {
     background-color: #fff;
     max-width: 500px;
     width: 100%;
