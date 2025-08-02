@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_cors import CORS
 from Routes.income_routes import income_stats
 from Routes.spending_routes import spending_stats
 from Constants.CommonFileConstants import CommonFileConstants
@@ -11,4 +12,14 @@ app.register_blueprint(spending_stats)
 def main_page():
     return render_template("index.html")
 
-app.run(debug=True, port=5002, host="0.0.0.0")
+@app.route("/description")
+def description():
+    return render_template("description.html")
+
+@app.route("/details")
+def details():
+    return render_template("stat_details.html")
+
+CORS(app)
+
+app.run(debug=True, host="0.0.0.0", port=5000)
