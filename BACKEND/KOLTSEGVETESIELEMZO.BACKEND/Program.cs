@@ -22,8 +22,11 @@ namespace KOLTSEGVETESIELEMZO.BACKEND
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .WithOrigins("http://127.0.0.1:5500")
+                .WithOrigins("http://localhost:5001")
             );
+
+            app.Urls.Clear();
+            app.Urls.Add("http://0.0.0.0:5284");
 
             app.Run();
         }

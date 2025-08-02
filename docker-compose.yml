@@ -3,9 +3,10 @@ version: '3.8'
 services:
   flask-api:
     build:
-      context: BACKEND/KOLTSEGVETESIELEMZO.BACKEND/Predict
+      context: .
+      dockerfile: BACKEND/KOLTSEGVETESIELEMZO.BACKEND/Predict/Dockerfile
     ports:
-      - "5002:5002"
+      - "5001:5000"
     networks:
       - backend-net
 

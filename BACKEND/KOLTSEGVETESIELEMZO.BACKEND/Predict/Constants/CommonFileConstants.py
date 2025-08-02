@@ -10,4 +10,5 @@ class CommonFileConstants:
     TEMPLATE_PATH: str = _FRONTEND_FOLDER_PATH + "/templates"
     STATIC_PATH: str = _FRONTEND_FOLDER_PATH + "/static"
     
+    print(PROJECT_PATH)
     print(TEMPLATE_PATH)
