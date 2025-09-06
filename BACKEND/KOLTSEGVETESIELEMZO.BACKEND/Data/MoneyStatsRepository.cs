@@ -13,6 +13,8 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         private List<SpendingDetails> spending = new List<SpendingDetails>();
         private CurrencyDetails currency = new CurrencyDetails();
 
+        private string flaskUrl = Environment.GetEnvironmentVariable("FLASK_API_URL") ?? "http://localhost:5001";
+
         public float CalculateTotalSavings()
         {
             float totalSavings = 0;
@@ -97,7 +99,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         public List<IncomeDetails> GetAverageIncome()
         {
             var client = new HttpClient();
-            var response = client.GetFromJsonAsync<List<IncomeDetails>>("http://flask-api:5000/api/averageIncome");
+            var response = client.GetFromJsonAsync<List<IncomeDetails>>($"{flaskUrl}/api/averageIncome");
 
             return response.Result;
         }
@@ -105,7 +107,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
         public List<SpendingDetails> GetAverageSpending()
         {
             var client = new HttpClient();
-            var response = client.GetFromJsonAsync<List<SpendingDetails>>("http://flask-api:5000/api/averageSpending");
+            var response = client.GetFromJsonAsync<List<SpendingDetails>>($"{flaskUrl}/api/averageSpending");
 
             return response.Result;
         }
@@ -122,7 +124,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
             var json = JsonConvert.SerializeObject(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = client.PostAsync("http://flask-api:5000/api/checkIncome", content);
+            var response = client.PostAsync($"{flaskUrl}/api/checkIncome", content);
             var respString = response.Result.Content.ReadAsStringAsync().Result;
 
             var result = JsonConvert.DeserializeObject<IncomeDetails>(respString);
@@ -141,7 +143,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND.Data
             var json = JsonConvert.SerializeObject(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = client.PostAsync("http://flask-api:5000/api/checkSpending", content);
+            var response = client.PostAsync($"{flaskUrl}/api/checkSpending", content);
             var responseString = response.Result.Content.ReadAsStringAsync().Result;
 
             var result = JsonConvert.DeserializeObject<SpendingDetails>(responseString);

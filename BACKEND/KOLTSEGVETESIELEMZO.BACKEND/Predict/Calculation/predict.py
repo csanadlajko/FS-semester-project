@@ -7,7 +7,7 @@ class PredictFunctions:
     
     def __init__(self, data: pd.DataFrame, budget_type: str | None = None) -> None:
         """
-        ``dtype`` and ``amount`` value must be 'income' or 'spending'
+        ``budget_type`` value must be 'income' or 'spending'
         """
         self.data = data
         self.dtype = f"{budget_type}Type"
@@ -22,7 +22,7 @@ class PredictFunctions:
         avg_amount: float = avg_data.loc[avg_data[self.dtype] == avg_data[self.dtype], self.amount].item()
         upper_treshold: float = (avg_amount * treshold) + avg_amount
         lower_treshold: float = avg_amount - (avg_amount * treshold)
-        if (avg_data[self.dtype] > lower_treshold and avg_data[self.amount] < upper_treshold):
+        if (avg_amount > lower_treshold and avg_amount < upper_treshold):
             return True
         return False
 
@@ -37,7 +37,7 @@ class PredictIncome(PredictFunctions):
     def average_income_by_type(self) -> pd.DataFrame:
         return super()._avgFilteredStat()
     
-    def check_income(self, income_data: dict[str, float]) -> bool:
+    def check_income(self) -> bool:
         return super()._verifyData(self.treshold)
 
 class PredictSpending(PredictFunctions):

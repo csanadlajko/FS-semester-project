@@ -12,7 +12,6 @@ def get_avg_spending():
 
 @spending_stats.route("/api/checkSpending", methods=['POST'])
 def check_income():
-    data: dict[str, float] = request.json
     ps_obj: PredictSpending = PredictSpending()
-    valid_spending: bool = PredictSpending.check_income(ps_obj, data)
+    valid_spending: bool = ps_obj.check_income()
     return jsonify({ 'Status': valid_spending })

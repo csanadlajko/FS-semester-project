@@ -11,6 +11,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND
             builder.Services.AddSingleton<IMoneyStatsRepository, MoneyStatsRepository>();
             var app = builder.Build();
 
+            string flaskUrl = Environment.GetEnvironmentVariable("FLASK_API_URL") ?? "http://127.0.0.1:5001";
 
             app.UseRouting();
             app.MapControllerRoute(
@@ -22,7 +23,7 @@ namespace KOLTSEGVETESIELEMZO.BACKEND
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .WithOrigins("http://localhost:5001")
+                .WithOrigins($"{flaskUrl}")
             );
 
             app.Urls.Clear();

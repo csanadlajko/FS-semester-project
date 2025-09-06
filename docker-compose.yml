@@ -9,6 +9,8 @@ services:
       - "5001:5000"
     networks:
       - backend-net
+    environment:
+      - DOTNET_API_URL=http://dotnet-backend:5284
 
   dotnet-backend:
     build:
@@ -19,6 +21,8 @@ services:
       - flask-api
     networks:
       - backend-net
+    environment:
+      - FLASK_API_URL=http://flask-api:5000
 
 networks:
   backend-net:

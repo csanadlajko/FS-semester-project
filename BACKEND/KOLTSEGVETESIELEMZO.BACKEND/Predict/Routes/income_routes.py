@@ -13,7 +13,6 @@ def average_income():
 
 @income_stats.route("/api/checkIncome", methods=["POST"])
 def check_income():
-    data: dict[str, float] = request.json
     pi_obj: PredictIncome = PredictIncome()
-    valid_income: bool = PredictIncome.check_income(pi_obj, data)
+    valid_income: bool = pi_obj.check_income()
     return jsonify({ 'Status': valid_income })

@@ -3,6 +3,12 @@ from flask_cors import CORS
 from Routes.income_routes import income_stats
 from Routes.spending_routes import spending_stats
 from Constants.CommonFileConstants import CommonFileConstants
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+FLASK_PORT: int = int(os.getenv("FLASK_PORT", 5001))
 
 app = Flask(__name__, template_folder=CommonFileConstants.TEMPLATE_PATH, static_folder=CommonFileConstants.STATIC_PATH)
 app.register_blueprint(income_stats)
@@ -22,4 +28,4 @@ def details():
 
 CORS(app)
 
-app.run(debug=True, host="0.0.0.0", port=5000)
+app.run(debug=True, host="0.0.0.0", port=FLASK_PORT)
