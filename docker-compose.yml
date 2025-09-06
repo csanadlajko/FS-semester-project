@@ -10,7 +10,9 @@ services:
     networks:
       - backend-net
     environment:
+      - FLASK_PORT=5000
       - DOTNET_API_URL=http://dotnet-backend:5284
+      - DOCKER_ENV=1
 
   dotnet-backend:
     build:

@@ -3,12 +3,15 @@ from flask_cors import CORS
 from Routes.income_routes import income_stats
 from Routes.spending_routes import spending_stats
 from Constants.CommonFileConstants import CommonFileConstants
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
+DOCKER_ENV: int = int(os.getenv("DOCKER_ENV", 0))
 
-FLASK_PORT: int = int(os.getenv("FLASK_PORT", 5001))
+if DOCKER_ENV == 0:
+    from dotenv import load_dotenv
+    load_dotenv()
+
+FLASK_PORT: int = int(os.getenv("FLASK_PORT", 5000))
 
 app = Flask(__name__, template_folder=CommonFileConstants.TEMPLATE_PATH, static_folder=CommonFileConstants.STATIC_PATH)
 app.register_blueprint(income_stats)
