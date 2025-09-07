@@ -5,6 +5,7 @@
 	- Add and categorize income and expenses
 	- Generate summary statistics and visualizations
 	- Track overspending with alerts
+	- Predict income / spending based on the user's previous data (under development) 
 
 <i>Semester project's official description: </i>
 
@@ -32,7 +33,35 @@ https://github.com/siposm/oktatas-fullstack/blob/master/semester-project/semeste
 		- **`my-5`** - adds margin on the y-axis
 	- Used switches to toggle between different (Bootstrap) tables (income / spending / overall statistics)
 	- Also used dark-themed Bootstrap tables to display filtered statistics on a separate page
-- ASP.NET framework for backend:
+- ASP.NET framework for backend (main endpoints):
 	- **`Models`** - Initializing the model classes which are used across the project
 	- **`Data`** - Includes the main interface for core logic, along with its implementations
 	- **`Controllers`** - Provides API endpoints, consumed by the frontend
+- Flask framework for prediction and calculations
+	- **`Calculation`** - Calculate spending and income data using Pandas
+	- **`Constants`** - Commonly used constants for Python calculations
+	- **`Functions`** - Commonly used functions for Python calculations
+	- **`Routes`** - Endpoints triggered by the ASP.NET backend
+
+## How to run?
+
+The app currently be ran on your local device and from Docker.
+
+- local device:
+	- start ASP.NET backend:
+		- open terminal
+		- type: cd \path\to\your\csharp\backend -> example: \..\..\..\KOLTSEGVETESIELEMZO\BACKEND\KOLTSEGVETESIELEMZO.BACKEND
+		- type: dotnet run
+		- after a few seconds the C# backend will be up and running
+	- start the Flask backend:
+		- open terminal
+		- type: cd \path\to\your\python\backend -> example: \..\..\..\..\KOLTSEGVETESIELEMZO\BACKEND\KOLTSEGVETESIELEMZO.BACKEND\Predict
+		- type: py -m pip install -r requirements.txt
+		- type: py main.py
+	- after both servers are running, the app can be found on http://127.0.0.1:5001
+
+- Docker
+	- open terminal and Docker desktop (install if necessary: https://docs.docker.com/engine/install/)
+	- type: docker-compose up --build
+	- or docker-compose build then docker-compose up
+	- after building and running, the app will be available on http://127.0.0.1:5001
