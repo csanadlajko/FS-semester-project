@@ -45,7 +45,7 @@ https://github.com/siposm/oktatas-fullstack/blob/master/semester-project/semeste
 
 ## How to run?
 
-The app currently be ran on your local device and from Docker.
+The app can currently be ran on your local device and from Docker.
 
 - local device:
 	- start ASP.NET backend:
